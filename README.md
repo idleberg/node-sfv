@@ -38,7 +38,7 @@ Returns checksum for specified file
 
 Usage: `fromFiles(filePath, algorithm?)`
 
-Returns checksum for specified glob
+Returns array of files/checksums objects for specified glob
 
 #### `fromStream`
 
