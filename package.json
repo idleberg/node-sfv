@@ -1,0 +1,60 @@
+{
+  "name": "simple-file-verification",
+  "version": "0.0.0",
+  "description": "Library to calculate SFV checksums from files and streams",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup --config",
+    "dev": "npm run start",
+    "lint": "eslint ./src",
+    "start": "rollup --watch --config",
+    "test": "ava ./test/*.js --verbose"
+  },
+  "main": "lib/sfv.js",
+  "homepage": "https://www.npmjs.com/package/simple-file-verification",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idleberg/node-sfv.git"
+  },
+  "keywords": [
+    "simple file verification",
+    "sfv",
+    "sfvx",
+    "crc",
+    "crc32",
+    "md5",
+    "sha1",
+    "sha256",
+    "sha512"
+  ],
+  "dependencies": {
+    "cyclic-32": "^1.1.0",
+    "globby": "^11.0.1",
+    "hasha": "^5.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-typescript": "^5.0.2",
+    "@types/node": "^14.0.26",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "ava": "^3.10.1",
+    "eslint": "^7.5.0",
+    "esm": "^3.2.25",
+    "execa": "^4.0.3",
+    "glob": "^7.1.6",
+    "husky": "^4.2.5",
+    "rollup": "^2.23.0",
+    "typescript": "^3.9.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
+  }
+}

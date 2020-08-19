@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: Installing cksfv
+          command: |
+            sudo apt-get -y update
+            sudo apt-get -y install cksfv md5 sha1sum sha256sum sha512sum
+      - restore_cache:
+          name: Restore npm Package Data Cache
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Node dependencies
+          command: npm install
+      - save_cache:
+          name: Cache npm Package Data
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run Tests
+          command: npm run test
