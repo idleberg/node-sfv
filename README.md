@@ -15,10 +15,12 @@ Library to calculate SFV checksums from files and streams
 
 ```js
 import * as SFV from 'simple-file-verification';
+import { createReadStream } from 'fs';
 
 (async() => {
-  const fileChecksum = await SFV.fromFile('/path/to/file');
-  const fileChecksums = await SFV.fromFile('/path/to/*.pdf');
+  await SFV.fromFile('/path/to/file');
+  await SFV.fromFile('/path/to/*.pdf');
+  await SFV.fromStream(createReadStream('/path/to/file'));
 })();
 ```
 
