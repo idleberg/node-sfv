@@ -5,7 +5,7 @@
 [![CircleCI](https://flat.badgen.net/circleci/github/idleberg/node-sfv)](https://circleci.com/gh/idleberg/node-sfv)
 [![David](https://flat.badgen.net/david/dep/idleberg/node-sfv)](https://david-dm.org/idleberg/node-sfv)
 
-Library to calculate SFV checksums from files and streams
+Library to calculate SFV checksums from files and streams (see [Simple File Verification](https://www.wikiwand.com/en/Simple_file_verification) for details)
 
 ## Installation
 
