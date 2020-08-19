@@ -1,16 +1,14 @@
+import { createHash } from 'crypto';
 import { createReadStream, promises as fs } from 'fs';
 import { relative } from 'path';
 import cyclic32 from 'cyclic-32';
 import globby from 'globby';
-import hasha from 'hasha';
 
 async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
   const algorithmSlug = slugify(algorithm);
   const hashingFunction = algorithmSlug === 'crc32'
     ? cyclic32.createHash()
-    : hasha.stream({
-      algorithm: algorithmSlug
-    });
+    : createHash(algorithm);
 
   return new Promise((resolve, reject) => {
     stream
