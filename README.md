@@ -18,9 +18,9 @@ import * as SFV from 'simple-file-verification';
 import { createReadStream } from 'fs';
 
 (async() => {
-  await SFV.fromFile('/path/to/file');
-  await SFV.fromFile('/path/to/*.pdf');
-  await SFV.fromStream(createReadStream('/path/to/file'));
+  await SFV.fromFile('path/to/file');
+  await SFV.fromFile('path/to/*.pdf');
+  await SFV.fromStream(createReadStream('path/to/file'));
 })();
 ```
 
