@@ -19,7 +19,7 @@ import { createReadStream } from 'fs';
 
 (async() => {
   await SFV.fromFile('path/to/file');
-  await SFV.fromFile('path/to/*.pdf');
+  await SFV.fromFiles('path/to/*.pdf');
   await SFV.fromStream(createReadStream('path/to/file'));
 })();
 ```
