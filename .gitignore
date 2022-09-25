@@ -7,6 +7,11 @@ vendor/
 npm-debug.log*
 yarn-error.log
 yarn.lock
+shrinkwrap.yaml
+
+# development
+.eslintcache
+tsconfig.tsbuildinfo
 
 # project specific
 *.sfv
