@@ -14,7 +14,7 @@ async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): P
     stream
       .pipe(hashingFunction)
       .on('error', error => reject(error))
-      .on('data', buffer => resolve(buffer.toString('hex').toUpperCase()));
+      .on('data', buffer => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
   });
 }
 
@@ -26,6 +26,7 @@ async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<string>
 
 async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
   const inputFiles = await globby(globString)
+
 
   return Promise.all(
     inputFiles.map(async inputFile => (
@@ -44,6 +45,12 @@ function slugify(algorithm: string): string {
       .toLowerCase()
       .replace('-', '')
   );
+}
+
+function getPrefix(algorithm: string): string {
+  return algorithm.toLowerCase() !== 'crc32'
+    ? `${algorithm.toUpperCase()}:`
+    : '';
 }
 
 export {
