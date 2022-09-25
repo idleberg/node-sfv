@@ -15,8 +15,8 @@
   },
   "exports": {
     ".": {
-      "import": "./lib/index.mjs",
-      "require": "./lib/index.cjs"
+      "import": "./lib/sfv.mjs",
+      "require": "./lib/sfv.cjs"
     }
   },
   "files": [
