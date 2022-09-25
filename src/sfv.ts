@@ -5,56 +5,56 @@ import cyclic32 from 'cyclic-32';
 import globby from 'globby';
 
 async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
-  const algorithmSlug = slugify(algorithm);
-  const hashingFunction = algorithmSlug === 'crc32'
-    ? cyclic32.createHash()
-    : createHash(algorithm);
+	const algorithmSlug = slugify(algorithm);
+	const hashingFunction = algorithmSlug === 'crc32'
+		? cyclic32.createHash()
+		: createHash(algorithm);
 
-  return new Promise((resolve, reject) => {
-    stream
-      .pipe(hashingFunction)
-      .on('error', error => reject(error))
-      .on('data', buffer => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
-  });
+	return new Promise((resolve, reject) => {
+		stream
+			.pipe(hashingFunction)
+			.on('error', error => reject(error))
+			.on('data', buffer => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+	});
 }
 
 async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<string> {
-  await fs.access(inputFile);
+	await fs.access(inputFile);
 
-  return await fromStream(createReadStream(inputFile), algorithm);
+	return await fromStream(createReadStream(inputFile), algorithm);
 }
 
 async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
-  const inputFiles = await globby(globString)
+	const inputFiles = await globby(globString)
 
 
-  return Promise.all(
-    inputFiles.map(async inputFile => (
-      {
-        file: relative(process.cwd(), inputFile),
-        checksum: await fromFile(inputFile, algorithm)
-      }
-    ))
-  );
+	return Promise.all(
+		inputFiles.map(async inputFile => (
+			{
+				file: relative(process.cwd(), inputFile),
+				checksum: await fromFile(inputFile, algorithm)
+			}
+		))
+	);
 }
 
 function slugify(algorithm: string): string {
-  return (
-    algorithm
-      .trim()
-      .toLowerCase()
-      .replace('-', '')
-  );
+	return (
+		algorithm
+			.trim()
+			.toLowerCase()
+			.replace('-', '')
+	);
 }
 
 function getPrefix(algorithm: string): string {
-  return algorithm.toLowerCase() !== 'crc32'
-    ? `${algorithm.toUpperCase()}:`
-    : '';
+	return algorithm.toLowerCase() !== 'crc32'
+		? `${algorithm.toUpperCase()}:`
+		: '';
 }
 
 export {
-  fromFile,
-  fromFiles,
-  fromStream,
+	fromFile,
+	fromFiles,
+	fromStream,
 };
