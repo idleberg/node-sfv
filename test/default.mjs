@@ -1,6 +1,6 @@
 // Dependencies
-import { createReadStream } from 'fs';
-import { dirname, resolve } from 'path';
+import { createReadStream } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import * as SFV from '../lib/sfv.mjs';
 import test from 'ava';
 

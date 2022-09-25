@@ -1,6 +1,6 @@
-import { createHash } from 'crypto';
-import { createReadStream, promises as fs } from 'fs';
-import { relative } from 'path';
+import { createHash } from 'node:crypto';
+import { createReadStream, promises as fs } from 'node:fs';
+import { relative } from 'node:path';
 import cyclic32 from 'cyclic-32';
 import globby from 'globby';
 
