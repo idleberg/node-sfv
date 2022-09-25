@@ -1,6 +1,6 @@
 {
   "name": "simple-file-verification",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Library to calculate SFV checksums from files and streams",
   "license": "MIT",
   "scripts": {
@@ -19,11 +19,11 @@
       "require": "./lib/index.cjs"
     }
   },
-	"files": [
-			"lib/",
-			"LICENSE",
-			"README.md"
-	],
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
   },
