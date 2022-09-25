@@ -11,9 +11,17 @@
     "lint": "npm-run-all --parallel lint:*",
     "prepack": "npm run build",
     "start": "rollup --watch --config",
-    "test": "ava ./test/*.js --verbose"
+    "test": "ava ./test/*.mjs --verbose"
   },
-  "main": "lib/sfv.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs"
+    }
+  },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
   "homepage": "https://www.npmjs.com/package/simple-file-verification",
   "repository": {
     "type": "git",
@@ -40,7 +48,7 @@
     "@types/node": "^14.18.30",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
-    "ava": "^3.15.0",
+    "ava": "4",
     "eslint": "^8.9.0",
     "eslint-plugin-json": "^3.1.0",
     "esm": "^3.2.25",
@@ -60,10 +68,5 @@
   "lint-staged": {
     "*.(json|ts)": "eslint --cache --fix",
     "*.md": "prettier --write"
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ]
   }
 }

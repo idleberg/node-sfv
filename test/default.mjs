@@ -1,11 +1,12 @@
 // Dependencies
 import { createReadStream } from 'fs';
-import { resolve } from 'path';
-import * as SFV from '../lib/sfv';
+import { dirname, resolve } from 'path';
+import * as SFV from '../lib/sfv.mjs';
 import test from 'ava';
 
-const testFile = resolve(__dirname, 'fixtures', 'udhr.txt');
-const testFiles = resolve(__dirname, 'fixtures', '*.txt');
+const __dirname = resolve(dirname(''));
+const testFile = resolve(__dirname, 'test/fixtures', 'udhr.txt');
+const testFiles = resolve(__dirname, 'test/fixtures', '*.txt');
 
 const checksums = {
 	'lorem_ipsum': {

@@ -16,10 +16,16 @@ export default [
       'crypto'
     ],
     input: './src/sfv.ts',
-    output: {
-      dir: 'lib',
-      format: 'cjs'
-    },
+    output: [
+			{
+				file: 'lib/sfv.mjs',
+				format: 'esm'
+			},
+			{
+				file: 'lib/sfv.cjs',
+				format: 'cjs'
+			}
+		],
     plugins: plugins
   }
 ];
