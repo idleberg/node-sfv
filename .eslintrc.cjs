@@ -4,14 +4,20 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
   ],
-  env: {
-      node: true
-  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:json/recommended'
   ],
-  ignorePatterns: [
-    'index.js'
-  ]
+  overrides: [
+    {
+      files: ['tsconfig.json'],
+      rules: {
+        'json/*': ['error', 'allowComments']
+      }
+    }
+  ],
+	ignorePatterns: [
+		'index.js'
+	]
 };
