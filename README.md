@@ -2,7 +2,7 @@
 
 [![npm](https://flat.badgen.net/npm/license/simple-file-verification)](https://www.npmjs.org/package/simple-file-verification)
 [![npm](https://flat.badgen.net/npm/v/simple-file-verification)](https://www.npmjs.org/package/simple-file-verification)
-[![CI](https://img.shields.io/github/workflow/status/idleberg/node-sfv/CI?style=flat-square)](https://github.com/idleberg/node-sfv/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/default.yml?style=flat-square)](https://github.com/idleberg/node-sfv/actions)
 
 Library to calculate SFV checksums from files and streams (see [Simple File Verification](https://www.wikiwand.com/en/Simple_file_verification) for details)
 
@@ -13,13 +13,13 @@ Library to calculate SFV checksums from files and streams (see [Simple File Veri
 ## Usage
 
 ```js
-import * as SFV from 'simple-file-verification';
-import { createReadStream } from 'fs';
+import * as SFV from "simple-file-verification";
+import { createReadStream } from "fs";
 
-(async() => {
-  await SFV.fromFile('path/to/file');
-  await SFV.fromFiles('path/to/*.pdf');
-  await SFV.fromStream(createReadStream('path/to/file'));
+(async () => {
+	await SFV.fromFile("path/to/file");
+	await SFV.fromFiles("path/to/*.pdf");
+	await SFV.fromStream(createReadStream("path/to/file"));
 })();
 ```
 
