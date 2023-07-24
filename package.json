@@ -56,7 +56,6 @@
     "esbuild": "^0.18.16",
     "eslint": "^8.45.0",
     "eslint-plugin-json": "^3.1.0",
-    "esm": "^3.2.25",
     "execa": "^7.1.1",
     "glob": "^10.3.3",
     "husky": "^8.0.3",
