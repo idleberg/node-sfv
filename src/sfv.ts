@@ -27,7 +27,7 @@ export async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<
 export async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
 	const inputFiles = await glob(globString)
 
-	return Promise.all(
+	return await Promise.all(
 		inputFiles.map(async inputFile => (
 			{
 				file: relative(process.cwd(), inputFile),
