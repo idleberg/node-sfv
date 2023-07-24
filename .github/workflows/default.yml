@@ -1,8 +1,23 @@
 name: CI
 
 on:
-- push
-- pull_request
+  push:
+    paths:
+    - '.github/**'
+    - 'src/**'
+    - 'tests/**'
+    - 'types/**'
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+  pull_request:
+      paths:
+      - '.github/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'types/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+  workflow_dispatch:
 
 jobs:
   default:
@@ -25,7 +40,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8
           run_install: false
 
       - name: Get pnpm store directory

@@ -1,10 +1,10 @@
 import { createHash } from 'node:crypto';
 import { createReadStream, promises as fs } from 'node:fs';
+import { glob } from 'glob';
 import { relative } from 'node:path';
 import cyclic32 from 'cyclic-32';
-import globby from 'globby';
 
-async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
+export async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
 	const algorithmSlug = slugify(algorithm);
 	const hashingFunction = algorithmSlug === 'crc32'
 		? cyclic32.createHash()
@@ -18,15 +18,14 @@ async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): P
 	});
 }
 
-async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<string> {
+export async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<string> {
 	await fs.access(inputFile);
 
 	return await fromStream(createReadStream(inputFile), algorithm);
 }
 
-async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
-	const inputFiles = await globby(globString)
-
+export async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
+	const inputFiles = await glob(globString)
 
 	return Promise.all(
 		inputFiles.map(async inputFile => (
@@ -52,9 +51,3 @@ function getPrefix(algorithm: string): string {
 		? `${algorithm.toUpperCase()}:`
 		: '';
 }
-
-export {
-	fromFile,
-	fromFiles,
-	fromStream,
-};

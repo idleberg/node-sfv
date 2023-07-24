@@ -1,12 +1,11 @@
-// Dependencies
 import { createReadStream } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import * as SFV from '../lib/sfv.mjs';
-import test from 'ava';
+import { resolve } from 'node:path';
+import { suite } from 'uvu';
+import * as assert from 'uvu/assert';
+import * as SFV from '../src/sfv';
 
-const __dirname = resolve(dirname(''));
-const testFile = resolve(__dirname, 'test/fixtures', 'udhr.txt');
-const testFiles = resolve(__dirname, 'test/fixtures', '*.txt');
+const testFile = resolve(process.cwd(), 'tests/fixtures', 'udhr.txt');
+const testFiles = resolve(process.cwd(), 'tests/fixtures', '*.txt');
 
 const checksums = {
 	'lorem_ipsum': {
@@ -44,27 +43,30 @@ function slugify(algorithm) {
 }
 
 // Tests
-['CRC32', 'MD5', 'SHA-1', 'SHA-256', 'SHA-512'].map(algorithm => {
+['CRC32', 'MD5', 'SHA-1', 'SHA-256', 'SHA-512'].forEach(algorithm => {
+	const test = suite(algorithm);
 	const algorithmSlug = slugify(algorithm);
 
-	test(`${algorithm}: Read file stream`, async t => {
+	test(`${algorithm}: Read file stream`, async () => {
 		const expected = checksums['udhr'][algorithmSlug];
 		const actual = await SFV.fromStream(createReadStream(testFile), algorithmSlug);
 
-		t.is(actual, expected);
+		assert.is(actual, expected);
 	});
 
-	test(`${algorithm}: Read single file`, async t => {
+	test(`${algorithm}: Read single file`, async () => {
 		const expected = checksums['udhr'][algorithmSlug];
 		const actual = await SFV.fromFile(testFile, algorithmSlug);
 
-		t.is(actual, expected);
+		assert.is(actual, expected);
 	});
 
-	test(`${algorithm}: Read many files`, async t => {
+	test(`${algorithm}: Read many files`, async () => {
 		const expected = mapChecksum(algorithmSlug);
 		const actual = await SFV.fromFiles(testFiles, algorithmSlug);
 
-		t.deepEqual(actual, expected);
+		assert.equal(actual, expected);
 	});
+
+	test.run();
 });
