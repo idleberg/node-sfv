@@ -28,7 +28,7 @@ function mapChecksum(algorithm) {
 	return Object.keys(checksums).map(item => {
 		return {
 			checksum: checksums[item][algorithm],
-			file: `test/fixtures/${item}.txt`
+			file: `tests/fixtures/${item}.txt`
 		};
 	});
 }
