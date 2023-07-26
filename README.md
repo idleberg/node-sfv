@@ -1,10 +1,10 @@
 # simple-file-verification
 
-[![npm](https://flat.badgen.net/npm/license/simple-file-verification)](https://www.npmjs.org/package/simple-file-verification)
-[![npm](https://flat.badgen.net/npm/v/simple-file-verification)](https://www.npmjs.org/package/simple-file-verification)
-[![CI](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/default.yml?style=flat-square)](https://github.com/idleberg/node-sfv/actions)
+> Library to calculate [SFV](https://www.wikiwand.com/en/Simple_file_verification) checksums from files and streams
 
-Library to calculate SFV checksums from files and streams (see [Simple File Verification](https://www.wikiwand.com/en/Simple_file_verification) for details)
+[![License](https://img.shields.io/github/license/idleberg/node-sfv?color=blue&style=for-the-badge)](https://github.com/idleberg/node-sfv/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/simple-file-verification?style=for-the-badge)](https://www.npmjs.org/package/simple-file-verification)
+[![Build](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/default.yml?style=for-the-badge)](https://github.com/idleberg/node-sfv/actions)
 
 ## Installation
 
