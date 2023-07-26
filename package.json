@@ -21,9 +21,10 @@
       "require": "./lib/sfv.cjs"
     }
   },
-  "types": " /types",
+  "types": "./types",
   "files": [
     "lib/",
+    "types/",
     "LICENSE",
     "README.md"
   ],
