@@ -14,7 +14,7 @@
 
 ```js
 import * as SFV from "simple-file-verification";
-import { createReadStream } from "fs";
+import { createReadStream } from "node:fs";
 
 (async () => {
 	await SFV.fromFile("path/to/file");
