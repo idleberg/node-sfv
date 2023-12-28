@@ -3,6 +3,7 @@ import { createReadStream, promises as fs } from 'node:fs';
 import { glob } from 'glob';
 import { relative } from 'node:path';
 import cyclic32 from 'cyclic-32';
+import SimpleFileValidation from 'types';
 
 export async function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
 	const algorithmSlug = slugify(algorithm);
@@ -24,7 +25,7 @@ export async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<
 	return await fromStream(createReadStream(inputFile), algorithm);
 }
 
-export async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<unknown[]> {
+export async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<SimpleFileValidation.FileMap[]> {
 	const inputFiles = await glob(globString)
 
 	return await Promise.all(
