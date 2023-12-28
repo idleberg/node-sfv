@@ -4,10 +4,8 @@
   "description": "Library to calculate SFV checksums from files and streams",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all --parallel build:*",
-    "build:cjs": "esbuild src/sfv.ts --platform=node --outfile=lib/sfv.cjs --format=cjs",
-    "build:esm": "esbuild src/sfv.ts --platform=node --outfile=lib/sfv.mjs --format=esm",
-    "dev": "npm run build:esm -- --watch",
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
     "lint:md": "remark . --quiet --frail --ignore-path .gitignore",
     "lint:ts": "eslint ./src --ignore-path .gitignore",
     "lint": "npm-run-all --parallel lint:*",
@@ -15,13 +13,8 @@
     "start": "npm run dev",
     "test": "uvu -r tsm tests"
   },
-  "exports": {
-    ".": {
-      "import": "./lib/sfv.mjs",
-      "require": "./lib/sfv.cjs"
-    }
-  },
-  "types": "./types",
+  "exports":"./lib/sfv.mjs",
+  "types": "./types/sfv.d.ts",
   "files": [
     "lib/",
     "types/",
@@ -29,7 +22,7 @@
     "README.md"
   ],
   "engines": {
-    "node": "^14.13.1 || >=16.0.0"
+    "node": ">=18.0.0"
   },
   "homepage": "https://www.npmjs.com/package/simple-file-verification",
   "repository": {
@@ -51,24 +44,24 @@
     "cyclic-32": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.60",
-    "@typescript-eslint/eslint-plugin": "^6.2.0",
-    "@typescript-eslint/parser": "^6.2.0",
-    "esbuild": "^0.18.17",
-    "eslint": "^8.45.0",
+    "@types/node": "^18.19.3",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-json": "^3.1.0",
-    "execa": "^7.1.1",
-    "glob": "^10.3.3",
+    "execa": "^8.0.1",
+    "glob": "^10.3.10",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "npm-run-all2": "^6.0.6",
-    "prettier": "^3.0.0",
-    "remark-cli": "^11.0.0",
+    "lint-staged": "^15.2.0",
+    "npm-run-all2": "^6.1.1",
+    "prettier": "^3.1.1",
+    "remark-cli": "^12.0.0",
     "remark-preset-lint-recommended": "^6.1.3",
     "remark-preset-prettier": "^2.0.1",
-    "tslib": "^2.6.1",
+    "tslib": "^2.6.2",
     "tsm": "^2.3.0",
-    "typescript": "^5.1.6",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
     "uvu": "^0.5.6"
   },
   "lint-staged": {
