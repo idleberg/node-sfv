@@ -14,7 +14,7 @@
     "test": "uvu -r tsm tests"
   },
   "exports":"./lib/sfv.mjs",
-  "types": "./types/sfv.d.ts",
+  "types": "./types/sfv.d.mts",
   "files": [
     "lib/",
     "types/",
