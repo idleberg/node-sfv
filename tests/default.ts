@@ -62,12 +62,13 @@ function slugify(algorithm) {
 	});
 
 	test(`${algorithm}: Read many files`, async () => {
-		const expected = mapChecksum(algorithmSlug);
-		const actual = await SFV.fromFiles(testFiles, algorithmSlug);
+		const expected = mapChecksum(algorithmSlug).sort((a, z) => a.file.localeCompare(z.file));
+		const actuals = (await SFV.fromFiles(testFiles, algorithmSlug)).sort((a, z) => a.file.localeCompare(z.file));
 
-		// FIXME should be using assert.equal
-		assert.is(actual.file, expected.file);
-		assert.is(actual.checksum, expected.checksum);
+		actuals.forEach((actual, index) => {
+			assert.is(actual.file, expected[index].file);
+			assert.is(actual.checksum, expected[index].checksum);
+		});
 	});
 
 	test.run();
