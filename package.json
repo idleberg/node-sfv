@@ -10,9 +10,9 @@
     "lint:ts": "eslint ./src --ignore-path .gitignore",
     "lint": "npm-run-all --parallel lint:*",
     "prepack": "npm run build",
-		"prepare": "husky",
-		"publish:jsr": "deno publish",
-		"publish:npm": "np --no-yarn --any-branch",
+    "prepare": "husky",
+    "publish:jsr": "deno publish",
+    "publish:npm": "np --no-yarn --any-branch",
     "start": "npm run dev",
     "test": "uvu -r tsm tests"
   },
@@ -25,7 +25,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.19.0"
   },
   "homepage": "https://www.npmjs.com/package/simple-file-verification",
   "repository": {
@@ -53,19 +53,19 @@
     "eslint": "^8.56.0",
     "eslint-plugin-json": "^3.1.0",
     "execa": "^8.0.1",
-    "glob": "^10.3.10",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
+    "glob": "^10.4.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "np": "^10.0.5",
-    "npm-run-all2": "^6.1.1",
-    "prettier": "^3.1.1",
-    "remark-cli": "^12.0.0",
-    "remark-preset-lint-recommended": "^6.1.3",
+    "npm-run-all2": "^6.2.0",
+    "prettier": "^3.2.5",
+    "remark-cli": "^12.0.1",
+    "remark-preset-lint-recommended": "^7.0.0",
     "remark-preset-prettier": "^2.0.1",
     "tslib": "^2.6.2",
     "tsm": "^2.3.0",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
     "uvu": "^0.5.6"
   },
   "lint-staged": {
