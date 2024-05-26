@@ -16,6 +16,7 @@
     "start": "npm run dev",
     "test": "uvu -r tsm tests"
   },
+	"type": "module",
   "exports": "./lib/sfv.mjs",
   "types": "./lib/sfv.d.mts",
   "files": [
