@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/github/license/idleberg/node-sfv?color=blue&style=for-the-badge)](https://github.com/idleberg/node-sfv/blob/main/LICENSE)
 [![Version: npm](https://img.shields.io/npm/v/simple-file-verification?style=for-the-badge)](https://www.npmjs.org/package/simple-file-verification)
-[![Version: jsr](https://img.shields.io/jsr/v/@idleberg/sfv?logo=jsr&logoColor=white&style=for-the-badge)](https://jsr.io/@idleberg/sfv)
+[![Version: jsr](https://img.shields.io/jsr/v/@idleberg/sfv?style=for-the-badge)](https://jsr.io/@idleberg/sfv)
 [![Build: NodeJS](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/ci-node.yml?logo=nodedotjs&logoColor=white&style=for-the-badge)](https://github.com/idleberg/node-sfv/actions)
 [![Build: Deno](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/ci-deno.yml?logo=deno&logoColor=white&style=for-the-badge)](https://github.com/idleberg/node-sfv/actions)
 
@@ -15,13 +15,13 @@
 ## Usage
 
 ```js
-import * as SFV from "simple-file-verification";
-import { createReadStream } from "node:fs";
+import * as SFV from 'simple-file-verification';
+import { createReadStream } from 'node:fs';
 
 (async () => {
-	await SFV.fromFile("path/to/file");
-	await SFV.fromFiles("path/to/*.pdf");
-	await SFV.fromStream(createReadStream("path/to/file"));
+	await SFV.fromFile('path/to/file');
+	await SFV.fromFiles('path/to/*.pdf');
+	await SFV.fromStream(createReadStream('path/to/file'));
 })();
 ```
 
