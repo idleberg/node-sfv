@@ -38,4 +38,4 @@ jobs:
       run: deno lint  --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
 
     - name: Run Tests
-      run: deno run -A --unstable-sloppy-imports npm:uvu tests
+      run: deno run --allow-all --unstable-sloppy-imports npm:uvu tests
