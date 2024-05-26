@@ -1,4 +1,4 @@
-name: 'CI: NodeJS'
+name: 'CI: Deno'
 
 on:
   push:
@@ -10,13 +10,13 @@ on:
     - 'package.json'
     - 'pnpm-lock.yaml'
   pull_request:
-    paths:
-    - '.github/**'
-    - 'tests/**'
-    - 'types/**'
-    - 'src/**'
-    - 'package.json'
-    - 'pnpm-lock.yaml'
+      paths:
+      - '.github/**'
+      - 'tests/**'
+      - 'types/**'
+      - 'src/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
   workflow_dispatch:
 
 jobs:
@@ -24,17 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        node-version: ['lts/*', '*']
 
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 10
 
-    - uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4.0.1
+    - uses: denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba # v1.1.4
       with:
-        node-version: ${{ matrix.node-version }}
+        deno-version: v1.x
 
     - name: Enable Corepack
       run: corepack enable
@@ -56,10 +54,7 @@ jobs:
       run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
     - name: Lint Source
-      run: pnpm run --if-present lint
-
-    - name: Build Source
-      run: pnpm run --if-present build
+      run: deno lint  --rules-exclude=no-explicit-any --ignore=node_modules **/*.ts
 
     - name: Run Tests
-      run: pnpm run --if-present test
+      run: deno run -A --unstable-sloppy-imports npm:uvu tests
