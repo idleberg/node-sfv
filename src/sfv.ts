@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { createReadStream, promises as fs } from 'node:fs';
+import { cwd } from './polyfills';
 import { glob } from 'glob';
 import { relative } from 'node:path';
 import cyclic32 from 'cyclic-32';
@@ -31,7 +32,7 @@ export async function fromFiles(globString: string | string[], algorithm = 'crc3
 	return await Promise.all(
 		inputFiles.map(async inputFile => (
 			{
-				file: relative(process.cwd(), inputFile),
+				file: relative(cwd(), inputFile),
 				checksum: await fromFile(inputFile, algorithm)
 			}
 		))

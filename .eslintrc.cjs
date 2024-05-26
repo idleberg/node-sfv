@@ -10,7 +10,13 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended',
 		'plugin:json/recommended'
 	],
-	rules: {},
+	globals: {
+		Deno: 'readonly'
+	},
+	rules: {
+		'@typescript-eslint/ban-ts-comment': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+	},
 	ignorePatterns: [
 		'test/**/*'
 	],

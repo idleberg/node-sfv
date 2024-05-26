@@ -1,11 +1,14 @@
 import { createReadStream } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import * as SFV from '../src/sfv';
+import { fileURLToPath } from 'node:url';
 
-const testFile = resolve(process.cwd(), 'tests/fixtures', 'udhr.txt');
-const testFiles = resolve(process.cwd(), 'tests/fixtures', '*.txt');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const testFile = resolve(__dirname, 'fixtures', 'udhr.txt');
+const testFiles = resolve(__dirname, 'fixtures', '*.txt');
 
 const checksums = {
 	'lorem_ipsum': {
