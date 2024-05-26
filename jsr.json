@@ -1,0 +1,14 @@
+{
+	"name": "@idleberg/sfv",
+	"version": "3.0.1",
+	"exports": "./src/sfv.ts",
+	"publish": {
+		"include": [
+			"./src/*",
+			"./types/*",
+			"jsr.json",
+			"LICENSE",
+			"README.md"
+		]
+	}
+}
