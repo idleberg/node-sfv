@@ -3,8 +3,8 @@
 > Library to calculate [SFV](https://www.wikiwand.com/en/Simple_file_verification) checksums from files and streams.
 
 [![License](https://img.shields.io/github/license/idleberg/node-sfv?color=blue&style=for-the-badge)](https://github.com/idleberg/node-sfv/blob/main/LICENSE)
-[![Version](https://img.shields.io/npm/v/simple-file-verification?style=for-the-badge)](https://www.npmjs.org/package/simple-file-verification)
-[![Version](https://img.shields.io/jsr/v/@idleberg/simple-file-verification?style=for-the-badge)](https://jsr.io/@idleberg/sfv)
+[![Version: npm](https://img.shields.io/npm/v/simple-file-verification?style=for-the-badge)](https://www.npmjs.org/package/simple-file-verification)
+[![Version: jsr](https://img.shields.io/jsr/v/@idleberg/sfv?logo=jsr&logoColor=white&style=for-the-badge)](https://jsr.io/@idleberg/sfv)
 [![Build: NodeJS](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/ci-node.yml?logo=nodedotjs&logoColor=white&style=for-the-badge)](https://github.com/idleberg/node-sfv/actions)
 [![Build: Deno](https://img.shields.io/github/actions/workflow/status/idleberg/node-sfv/ci-deno.yml?logo=deno&logoColor=white&style=for-the-badge)](https://github.com/idleberg/node-sfv/actions)
 
