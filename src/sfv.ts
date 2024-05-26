@@ -6,7 +6,13 @@ import { relative } from 'node:path';
 import cyclic32 from 'cyclic-32';
 import SimpleFileValidation from '../types/index.d';
 
-export function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): Promise<string> {
+/**
+ * Returns a checksum from a readable file stream.
+ * @param stream
+ * @param algorithm
+ * @returns
+ */
+export function fromStream(stream: NodeJS.ReadableStream, algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<string> {
 	const algorithmSlug = slugify(algorithm);
 	const hashingFunction = algorithmSlug === 'crc32'
 		? cyclic32.createHash()
@@ -20,13 +26,25 @@ export function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): 
 	});
 }
 
-export async function fromFile(inputFile: string, algorithm = 'crc32'): Promise<string> {
+/**
+ * Returns a checksum for a file.
+ * @param stream
+ * @param algorithm
+ * @returns
+ */
+export async function fromFile(inputFile: string, algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<string> {
 	await fs.access(inputFile);
 
 	return await fromStream(createReadStream(inputFile), algorithm);
 }
 
-export async function fromFiles(globString: string | string[], algorithm = 'crc32'): Promise<SimpleFileValidation.FileMap[]> {
+/**
+ * Returns a map of checksums for many files.
+ * @param stream
+ * @param algorithm
+ * @returns
+ */
+export async function fromFiles(globString: string | string[], algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<SimpleFileValidation.FileMap[]> {
 	const inputFiles = await glob(globString)
 
 	return await Promise.all(
@@ -39,7 +57,12 @@ export async function fromFiles(globString: string | string[], algorithm = 'crc3
 	);
 }
 
-function slugify(algorithm: string): string {
+/**
+ *
+ * @param algorithm
+ * @returns
+ */
+function slugify(algorithm: SimpleFileValidation.Algorithm): string {
 	return (
 		algorithm
 			.trim()
@@ -48,7 +71,7 @@ function slugify(algorithm: string): string {
 	);
 }
 
-function getPrefix(algorithm: string): string {
+function getPrefix(algorithm: SimpleFileValidation.Algorithm): string {
 	return algorithm.toLowerCase() !== 'crc32'
 		? `${algorithm.toUpperCase()}:`
 		: '';
