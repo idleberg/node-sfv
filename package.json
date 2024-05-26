@@ -1,6 +1,6 @@
 {
   "name": "simple-file-verification",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Library to calculate SFV checksums from files and streams",
   "license": "MIT",
   "scripts": {
@@ -16,7 +16,7 @@
     "start": "npm run dev",
     "test": "uvu -r tsm tests"
   },
-	"type": "module",
+  "type": "module",
   "exports": "./lib/sfv.mjs",
   "types": "./lib/sfv.d.mts",
   "files": [
