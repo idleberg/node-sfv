@@ -12,11 +12,12 @@ import SimpleFileValidation from '../types/index.d';
  * @param algorithm
  * @returns
  */
-export function fromStream(stream: NodeJS.ReadableStream, algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<string> {
+export function fromStream(
+	stream: NodeJS.ReadableStream,
+	algorithm: SimpleFileValidation.Algorithm = 'crc32',
+): Promise<string> {
 	const algorithmSlug = slugify(algorithm);
-	const hashingFunction = algorithmSlug === 'crc32'
-		? cyclic32.createHash()
-		: createHash(algorithm);
+	const hashingFunction = algorithmSlug === 'crc32' ? cyclic32.createHash() : createHash(algorithm);
 
 	return new Promise((resolve, reject) => {
 		stream
@@ -32,7 +33,10 @@ export function fromStream(stream: NodeJS.ReadableStream, algorithm: SimpleFileV
  * @param algorithm
  * @returns
  */
-export async function fromFile(inputFile: string, algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<string> {
+export async function fromFile(
+	inputFile: string,
+	algorithm: SimpleFileValidation.Algorithm = 'crc32',
+): Promise<string> {
 	await fs.access(inputFile);
 
 	return await fromStream(createReadStream(inputFile), algorithm);
@@ -44,16 +48,17 @@ export async function fromFile(inputFile: string, algorithm: SimpleFileValidatio
  * @param algorithm
  * @returns
  */
-export async function fromFiles(globString: string | string[], algorithm: SimpleFileValidation.Algorithm = 'crc32'): Promise<SimpleFileValidation.FileMap[]> {
-	const inputFiles = await glob(globString)
+export async function fromFiles(
+	globString: string | string[],
+	algorithm: SimpleFileValidation.Algorithm = 'crc32',
+): Promise<SimpleFileValidation.FileMap[]> {
+	const inputFiles = await glob(globString);
 
 	return await Promise.all(
-		inputFiles.map(async inputFile => (
-			{
-				file: relative(cwd(), inputFile),
-				checksum: await fromFile(inputFile, algorithm)
-			}
-		))
+		inputFiles.map(async (inputFile) => ({
+			file: relative(cwd(), inputFile),
+			checksum: await fromFile(inputFile, algorithm),
+		})),
 	);
 }
 
@@ -63,16 +68,9 @@ export async function fromFiles(globString: string | string[], algorithm: Simple
  * @returns
  */
 function slugify(algorithm: SimpleFileValidation.Algorithm): string {
-	return (
-		algorithm
-			.trim()
-			.toLowerCase()
-			.replace('-', '')
-	);
+	return algorithm.trim().toLowerCase().replace('-', '');
 }
 
 function getPrefix(algorithm: SimpleFileValidation.Algorithm): string {
-	return algorithm.toLowerCase() !== 'crc32'
-		? `${algorithm.toUpperCase()}:`
-		: '';
+	return algorithm.toLowerCase() !== 'crc32' ? `${algorithm.toUpperCase()}:` : '';
 }
