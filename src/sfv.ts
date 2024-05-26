@@ -15,8 +15,8 @@ export function fromStream(stream: NodeJS.ReadableStream, algorithm = 'crc32'): 
 	return new Promise((resolve, reject) => {
 		stream
 			.pipe(hashingFunction)
-			.on('error', error => reject(error))
-			.on('data', buffer => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+			.on('error', (error: Error) => reject(error))
+			.on('data', (buffer: any) => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
 	});
 }
 
