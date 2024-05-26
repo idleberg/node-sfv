@@ -5,5 +5,4 @@ declare namespace SimpleFileValidation {
 	}
 }
 
-export = SimpleFileValidation;
-export as namespace SimpleFileValidation;
+export default SimpleFileValidation;
