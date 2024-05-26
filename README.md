@@ -1,6 +1,6 @@
 # simple-file-verification
 
-> Library to calculate [SFV](https://www.wikiwand.com/en/Simple_file_verification) checksums from files and streams
+> Library to calculate [SFV](https://www.wikiwand.com/en/Simple_file_verification) checksums from files and streams.
 
 [![License](https://img.shields.io/github/license/idleberg/node-sfv?color=blue&style=for-the-badge)](https://github.com/idleberg/node-sfv/blob/main/LICENSE)
 [![Version](https://img.shields.io/npm/v/simple-file-verification?style=for-the-badge)](https://www.npmjs.org/package/simple-file-verification)
@@ -52,4 +52,4 @@ Returns checksum Node.js readable stream
 
 ## License
 
-This work is licensed under [The MIT License](LICENSE)
+This work is licensed under [The MIT License](LICENSE).
