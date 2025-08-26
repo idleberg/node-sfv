@@ -3,7 +3,7 @@ name: 'CI: Deno'
 on:
   push:
     paths:
-    - '.github/**'
+    - '.github/workflows/ci-deno.yml'
     - 'tests/**'
     - 'types/**'
     - 'src/**'
@@ -11,7 +11,7 @@ on:
     - 'pnpm-lock.yaml'
   pull_request:
       paths:
-      - '.github/**'
+      - '.github/workflows/ci-deno.yml'
       - 'tests/**'
       - 'types/**'
       - 'src/**'
@@ -24,15 +24,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      matrix:
+        deno-version: ['1.x', '2.x']
 
     steps:
-    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 10
 
-    - uses: denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba # v1.1.4
+    - uses: denoland/setup-deno@v2
       with:
-        deno-version: v1.x
+        deno-version: ${{ matrix.deno-version }}
 
     - name: Lint Source
       run: deno lint  --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
