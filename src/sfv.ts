@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer';
 import { createHash } from 'node:crypto';
 import { createReadStream, promises as fs } from 'node:fs';
 import { relative } from 'node:path';
