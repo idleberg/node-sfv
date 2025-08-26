@@ -3,7 +3,7 @@ import { cwd } from "node:process";
 import { resolve } from "node:path";
 import { suite } from "uvu";
 import * as assert from "uvu/assert";
-import * as SFV from "../src/sfv";
+import * as SFV from "../src/sfv.ts";
 
 const testFile = resolve(cwd(), "tests/fixtures", "udhr.txt");
 const testFiles = resolve(cwd(), "tests/fixtures", "*.txt");
@@ -27,7 +27,7 @@ const checksums = {
 		sha512:
 			"SHA512:ADB861B5FE31D660489DA97C38BC04292C2DFF6AC855DE6FF90B63551338092835E28144B25743E2122CCF9E63EE2CD1135DBE35278F2106BC652123AB3BC69D",
 	},
-};
+} as const;
 
 function mapChecksum(algorithm) {
 	return Object.keys(checksums).map((item) => {
