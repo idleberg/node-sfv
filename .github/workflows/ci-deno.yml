@@ -36,8 +36,11 @@ jobs:
       with:
         deno-version: ${{ matrix.deno-version }}
 
+    - name: Install dependencies
+      run: deno install
+
     - name: Lint Source
-      run: deno lint  --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
+      run: deno lint --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
 
     - name: Run Tests
       run: deno run --allow-all --unstable-sloppy-imports npm:uvu tests
