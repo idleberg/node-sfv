@@ -23,7 +23,7 @@ export function fromStream(
 		stream
 			.pipe(hashingFunction)
 			.on('error', (error: Error) => reject(error))
-			.on('data', (buffer: any) => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+			.on('data', (buffer: Buffer) => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
 	});
 }
 
