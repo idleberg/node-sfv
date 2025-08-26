@@ -4,7 +4,7 @@ import { relative } from 'node:path';
 import { cwd } from 'node:process';
 import cyclic32 from 'cyclic-32';
 import { glob } from 'glob';
-import type SimpleFileValidation from '../types/index.d';
+import type SimpleFileValidation from '../types/index.d.ts';
 
 /**
  * Returns a checksum from a readable file stream.
