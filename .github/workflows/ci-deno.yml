@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        deno-version: ['1.x', '2.x']
+        deno-version: ['2.x']
 
     steps:
     - uses: actions/checkout@v5
