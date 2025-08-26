@@ -1,10 +1,10 @@
 import { createHash } from 'node:crypto';
 import { createReadStream, promises as fs } from 'node:fs';
-import { cwd } from 'node:process';
-import { glob } from 'glob';
 import { relative } from 'node:path';
+import { cwd } from 'node:process';
 import cyclic32 from 'cyclic-32';
-import SimpleFileValidation from '../types/index.d';
+import { glob } from 'glob';
+import type SimpleFileValidation from '../types/index.d';
 
 /**
  * Returns a checksum from a readable file stream.

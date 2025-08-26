@@ -6,11 +6,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "npm run build -- --watch",
-    "lint:md": "remark . --quiet --frail --ignore-path .gitignore",
-    "lint:ts": "eslint ./src --ignore-path .gitignore",
-    "lint": "npm-run-all --parallel lint:*",
+    "lint": "biome check --no-errors-on-unmatched --vcs-enabled=true --vcs-use-ignore-file=true",
     "prepack": "npm run build",
-    "prepare": "husky",
+    "prepare": "lefthook install",
     "publish:jsr": "deno publish",
     "publish:npm": "np --no-yarn --any-branch",
     "start": "npm run dev",
@@ -48,30 +46,22 @@
     "cyclic-32": "^1.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.2",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^18.19.3",
-    "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@typescript-eslint/parser": "^6.16.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-json": "^3.1.0",
     "execa": "^9.1.0",
     "glob": "^10.4.1",
-    "husky": "^9.0.11",
+    "lefthook": "^1.12.3",
     "lint-staged": "^15.2.5",
     "np": "^10.0.5",
-    "npm-run-all2": "^6.2.0",
-    "prettier": "^3.2.5",
-    "remark-cli": "^12.0.1",
-    "remark-preset-lint-recommended": "^7.0.0",
-    "remark-preset-prettier": "^2.0.1",
+    "tsdown": "^0.14.2",
     "tslib": "^2.6.2",
     "tsm": "^2.3.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "uvu": "^0.5.6"
-  },
-  "lint-staged": {
-    "*.(json|ts)": "eslint --cache --fix",
-    "*.md": "prettier --write"
   },
   "packageManager": "pnpm@9.1.2+sha512.127dc83b9ea10c32be65d22a8efb4a65fb952e8fefbdfded39bdc3c97efc32d31b48b00420df2c1187ace28c921c902f0cb5a134a4d032b8b5295cbfa2c681e2"
 }

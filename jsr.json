@@ -3,12 +3,6 @@
 	"version": "3.0.4",
 	"exports": "./src/sfv.ts",
 	"publish": {
-		"include": [
-			"./src/*",
-			"./types/*",
-			"jsr.json",
-			"LICENSE",
-			"README.md"
-		]
+		"include": ["./src/*", "./types/*", "jsr.json", "LICENSE", "README.md"]
 	}
 }
