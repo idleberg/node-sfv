@@ -11,7 +11,7 @@ import type SimpleFileValidation from '../types/index.d.ts';
  * Returns a checksum from a readable file stream.
  * @param stream
  * @param algorithm
- * @returns
+ * @returns the checksum for a provided file stream.
  */
 export function fromStream(
 	stream: NodeJS.ReadableStream,
@@ -24,7 +24,7 @@ export function fromStream(
 		stream
 			.pipe(hashingFunction)
 			.on('error', (error: Error) => reject(error))
-			.on('data', (buffer: Buffer) => resolve(`${getPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+			.on('data', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
 	});
 }
 
@@ -32,7 +32,7 @@ export function fromStream(
  * Returns a checksum for a file.
  * @param stream
  * @param algorithm
- * @returns
+ * @returns the checksum for a provided file.
  */
 export async function fromFile(
 	inputFile: string,
@@ -47,7 +47,7 @@ export async function fromFile(
  * Returns a map of checksums for many files.
  * @param stream
  * @param algorithm
- * @returns
+ * @returns an object of filename and its checksum.
  */
 export async function fromFiles(
 	globString: string | string[],
@@ -64,14 +64,19 @@ export async function fromFiles(
 }
 
 /**
- *
+ * Helper function to create a normalized "slug" version of a supported checksum algorithm.
  * @param algorithm
- * @returns
+ * @returns a slug of the algorithm.
  */
 function slugify(algorithm: SimpleFileValidation.Algorithm): string {
 	return algorithm.trim().toLowerCase().replace('-', '');
 }
 
-function getPrefix(algorithm: SimpleFileValidation.Algorithm): string {
+/**
+ * For SFVX, checksums get prefixed with the algorithm.
+ * @param algorithm
+ * @returns a prefix for the checksum.
+ */
+function setPrefix(algorithm: SimpleFileValidation.Algorithm): string {
 	return algorithm.toLowerCase() !== 'crc32' ? `${algorithm.toUpperCase()}:` : '';
 }
