@@ -44,10 +44,10 @@ export async function fromFile(
 }
 
 /**
- * Returns a map of checksums for many files.
+ * Returns an array of checksums for many files.
  * @param stream
  * @param algorithm
- * @returns an object of filename and its checksum.
+ * @returns an array of object consisting of filename and its checksum.
  */
 export async function fromFiles(
 	globString: string | string[],
