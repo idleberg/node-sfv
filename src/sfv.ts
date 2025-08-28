@@ -30,7 +30,7 @@ export function fromStream(
 
 /**
  * Returns a checksum for a file.
- * @param stream
+ * @param inputFile path to a file
  * @param algorithm
  * @returns the checksum for a provided file.
  */
@@ -45,15 +45,15 @@ export async function fromFile(
 
 /**
  * Returns an array of checksums for many files.
- * @param stream
+ * @param inputFile supports globs, file paths or an array of either
  * @param algorithm
  * @returns an array of object consisting of filename and its checksum.
  */
 export async function fromFiles(
-	globString: string | string[],
+	inputFile: string | string[],
 	algorithm: SimpleFileValidation.Algorithm = 'crc32',
 ): Promise<SimpleFileValidation.FileMap[]> {
-	const inputFiles = await glob(globString);
+	const inputFiles = await glob(inputFile);
 
 	return await Promise.all(
 		inputFiles.map(async (inputFile) => ({
