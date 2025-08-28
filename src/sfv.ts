@@ -24,7 +24,7 @@ export function fromStream(
 		stream
 			.pipe(hashingFunction)
 			.on('error', (error: Error) => reject(error))
-			.on('finish', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+			.on('data', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
 	});
 }
 
@@ -54,13 +54,20 @@ export async function fromFiles(
 	algorithm: SimpleFileValidation.Algorithm = 'crc32',
 ): Promise<SimpleFileValidation.FileMap[]> {
 	const inputFiles = await glob(inputFile);
+	const output: SimpleFileValidation.FileMap[] = [];
 
-	return await Promise.all(
-		inputFiles.map(async (inputFile) => ({
-			file: relative(cwd(), inputFile),
-			checksum: await fromFile(inputFile, algorithm),
-		})),
-	);
+	for (const inputFile of inputFiles) {
+		try {
+			const file = relative(cwd(), inputFile);
+			const checksum = await fromFile(inputFile, algorithm);
+
+			output.push({ file, checksum });
+		} catch (error) {
+			console.error(error instanceof Error ? error.message : error);
+		}
+	}
+
+	return output;
 }
 
 /**
