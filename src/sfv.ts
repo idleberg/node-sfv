@@ -24,7 +24,7 @@ export function fromStream(
 		stream
 			.pipe(hashingFunction)
 			.on('error', (error: Error) => reject(error))
-			.on('data', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+			.on('finish', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
 	});
 }
 
@@ -69,6 +69,10 @@ export async function fromFiles(
  * @returns a slug of the algorithm.
  */
 function slugify(algorithm: SimpleFileValidation.Algorithm): string {
+	if (!algorithm || typeof algorithm !== 'string') {
+		throw new Error('Algorithm must be a non-empty string');
+	}
+
 	return algorithm.trim().toLowerCase().replace('-', '');
 }
 
