@@ -49,7 +49,7 @@ export async function fromFile(
  * @param algorithm
  * @returns an array of object consisting of filename and its checksum.
  */
-export async function fromFiles(
+export async function fromGlob(
 	inputFile: string | string[],
 	algorithm: SimpleFileValidation.Algorithm = 'crc32',
 ): Promise<SimpleFileValidation.FileMap[]> {

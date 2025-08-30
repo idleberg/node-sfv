@@ -35,9 +35,9 @@ Usage: `fromFile(filePath, algorithm?)`
 
 Returns checksum for specified file
 
-#### `fromFiles`
+#### `fromGlob`
 
-Usage: `fromFiles(filePath, algorithm?)`
+Usage: `fromGlob(filePath, algorithm?)`
 
 Returns array of files/checksums objects for specified glob
 

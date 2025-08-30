@@ -68,7 +68,7 @@ function slugify(algorithm) {
 		const expected = mapChecksum(algorithmSlug).sort((a, z) =>
 			a.file.localeCompare(z.file)
 		);
-		const actuals = (await SFV.fromFiles(testFiles, algorithmSlug)).sort(
+		const actuals = (await SFV.fromGlob(testFiles, algorithmSlug)).sort(
 			(a, z) => a.file.localeCompare(z.file)
 		);
 
