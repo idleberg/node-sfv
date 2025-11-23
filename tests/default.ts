@@ -46,14 +46,14 @@ function slugify(algorithm) {
 	const algorithmSlug = slugify(algorithm);
 
 	test(`${algorithm}: Read file stream`, async () => {
-		const expected = checksums['udhr'][algorithmSlug];
+		const expected = checksums.udhr[algorithmSlug];
 		const actual = await SFV.fromStream(createReadStream(testFile), algorithmSlug);
 
 		assert.is(actual, expected);
 	});
 
 	test(`${algorithm}: Read single file`, async () => {
-		const expected = checksums['udhr'][algorithmSlug];
+		const expected = checksums.udhr[algorithmSlug];
 		const actual = await SFV.fromFile(testFile, algorithmSlug);
 
 		assert.is(actual, expected);
