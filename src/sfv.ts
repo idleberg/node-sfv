@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream, promises as fs } from 'node:fs';
 import { relative } from 'node:path';
 import { cwd } from 'node:process';
+// @ts-expect-error no types provided by package
 import cyclic32 from 'cyclic-32';
 import { glob } from 'glob';
 import type SimpleFileValidation from '../types/index.d.ts';
