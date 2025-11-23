@@ -11,6 +11,9 @@ importers:
       cyclic-32:
         specifier: ^1.2.0
         version: 1.2.0
+      glob:
+        specifier: ^13.0.0
+        version: 13.0.0
     devDependencies:
       '@commitlint/cli':
         specifier: ^20.1.0
@@ -33,9 +36,6 @@ importers:
       execa:
         specifier: ^9.6.0
         version: 9.6.0
-      glob:
-        specifier: ^13.0.0
-        version: 13.0.0
       np:
         specifier: ^10.2.0
         version: 10.2.0(@types/node@24.10.1)(typescript@5.9.3)
