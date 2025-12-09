@@ -20,7 +20,7 @@ import { createReadStream } from 'node:fs';
 
 await SFV.fromFile('path/to/file');
 
-// recommended for larger files
+// serves the purpose of an example
 const fileStream = createReadStream('path/to/file')
 await SFV.fromStream(fileStream);
 ```
