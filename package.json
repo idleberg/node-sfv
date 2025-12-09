@@ -1,6 +1,6 @@
 {
 	"name": "simple-file-verification",
-	"version": "4.0.0",
+	"version": "5.0.0",
 	"description": "Library to calculate SFV checksums from files and streams",
 	"license": "MIT",
 	"scripts": {
