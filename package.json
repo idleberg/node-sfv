@@ -17,8 +17,14 @@
 		"test": "uvu -r tsm tests"
 	},
 	"type": "module",
-	"exports": "./lib/sfv.mjs",
-	"types": "./lib/sfv.d.mts",
+	"exports": {
+		"types": {
+			"require": "./lib/sfv.d.cts",
+			"import": "./lib/sfv.d.mts"
+		},
+		"require": "./lib/sfv.cjs",
+		"import": "./lib/sfv.mjs"
+	},
 	"files": [
 		"lib/",
 		"types/",
