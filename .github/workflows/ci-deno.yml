@@ -42,5 +42,6 @@ jobs:
       - name: Lint Source
         run: deno lint --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
 
+      # FIXME re-enable once Deno issue is fixed - https://github.com/denoland/deno/pull/31380
       # - name: Run Tests
       # run: deno run --allow-all --unstable-sloppy-imports npm:vitest
