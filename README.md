@@ -19,7 +19,10 @@ import * as SFV from 'simple-file-verification';
 import { createReadStream } from 'node:fs';
 
 await SFV.fromFile('path/to/file');
-await SFV.fromStream(createReadStream('path/to/file'));
+
+// recommended for larger files
+const fileStream = createReadStream('path/to/file')
+await SFV.fromStream(fileStream);
 ```
 
 ### API
