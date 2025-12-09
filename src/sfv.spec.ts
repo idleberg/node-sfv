@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { cwd } from 'node:process';
 import { Readable } from 'node:stream';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { fromFile, fromStream } from './sfv.js';
+import { fromFile, fromStream } from './sfv.ts';
 
 const TEST_DIR = join(cwd(), 'test-fixtures');
 const TEST_FILE = join(TEST_DIR, 'test-file.txt');
