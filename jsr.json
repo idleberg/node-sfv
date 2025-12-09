@@ -1,6 +1,6 @@
 {
 	"name": "@idleberg/sfv",
-	"version": "4.0.0",
+	"version": "5.0.0",
 	"exports": "./src/sfv.ts",
 	"publish": {
 		"include": ["./src/*", "./types/*", "jsr.json", "LICENSE", "README.md"]
