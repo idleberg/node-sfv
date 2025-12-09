@@ -29,13 +29,13 @@ await SFV.fromStream(fileStream);
 
 #### `fromFile`
 
-Usage: `fromFile(filePath)`
+Usage: `fromFile(filePath: string)`
 
 Returns checksum for specified file.
 
 #### `fromStream`
 
-Usage: `fromStream(readableStream)`
+Usage: `fromStream(fileStream: Readable)`
 
 Returns checksum for readable stream.
 
