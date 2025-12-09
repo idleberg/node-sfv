@@ -1,7 +1,6 @@
 import type { Buffer } from 'node:buffer';
-import { readFile } from 'node:fs/promises';
-import { crc32, createCRC32 } from 'hash-wasm';
-
+import { createReadStream } from 'node:fs';
+import { createCRC32 } from 'hash-wasm';
 /**
  * Returns a checksum from a readable file stream.
  * @param stream
@@ -49,7 +48,7 @@ export async function fromStream(stream: NodeJS.ReadableStream): Promise<string>
  * @returns the checksum for a provided file.
  */
 export async function fromFile(inputFile: string): Promise<string> {
-	const fileContents = await readFile(inputFile);
+	const readStream = createReadStream(inputFile);
 
-	return (await crc32(fileContents)).toUpperCase();
+	return fromStream(readStream);
 }
