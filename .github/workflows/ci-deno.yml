@@ -1,22 +1,22 @@
-name: 'CI: Deno'
+name: "CI: Deno"
 
 on:
   push:
     paths:
-    - '.github/workflows/ci-deno.yml'
-    - 'tests/**'
-    - 'types/**'
-    - 'src/**'
-    - 'package.json'
-    - 'pnpm-lock.yaml'
+      - ".github/workflows/ci-deno.yml"
+      - "tests/**"
+      - "types/**"
+      - "src/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
   pull_request:
-      paths:
-      - '.github/workflows/ci-deno.yml'
-      - 'tests/**'
-      - 'types/**'
-      - 'src/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
+    paths:
+      - ".github/workflows/ci-deno.yml"
+      - "tests/**"
+      - "types/**"
+      - "src/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
   workflow_dispatch:
 
 jobs:
@@ -25,22 +25,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        deno-version: ['2.x']
+        deno-version: ["2.x"]
 
     steps:
-    - uses: actions/checkout@v5
-      with:
-        fetch-depth: 10
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 10
 
-    - uses: denoland/setup-deno@v2
-      with:
-        deno-version: ${{ matrix.deno-version }}
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno-version }}
 
-    - name: Install dependencies
-      run: deno install
+      - name: Install dependencies
+        run: deno install
 
-    - name: Lint Source
-      run: deno lint --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
+      - name: Lint Source
+        run: deno lint --rules-exclude=no-explicit-any --ignore=node_modules src/*.ts
 
-    - name: Run Tests
-      run: deno run --allow-all --unstable-sloppy-imports npm:uvu tests
+      - name: Run Tests
+        run: deno run --allow-all --unstable-sloppy-imports npm:vitest tests
