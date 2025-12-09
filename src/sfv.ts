@@ -1,94 +1,55 @@
 import type { Buffer } from 'node:buffer';
-import { createHash } from 'node:crypto';
-import { createReadStream, promises as fs } from 'node:fs';
-import { relative } from 'node:path';
-import { cwd } from 'node:process';
-// @ts-expect-error no types provided by package
-import cyclic32 from 'cyclic-32';
-import { glob } from 'glob';
-import type SimpleFileValidation from '../types/index.d.ts';
+import { readFile } from 'node:fs/promises';
+import { crc32, createCRC32 } from 'hash-wasm';
 
 /**
  * Returns a checksum from a readable file stream.
  * @param stream
- * @param algorithm
  * @returns the checksum for a provided file stream.
  */
-export function fromStream(
-	stream: NodeJS.ReadableStream,
-	algorithm: SimpleFileValidation.Algorithm = 'crc32',
-): Promise<string> {
-	const algorithmSlug = slugify(algorithm);
-	const hashingFunction = algorithmSlug === 'crc32' ? cyclic32.createHash() : createHash(algorithm);
+export async function fromStream(stream: NodeJS.ReadableStream): Promise<string> {
+	const hasher = await createCRC32();
 
 	return new Promise((resolve, reject) => {
-		stream
-			.pipe(hashingFunction)
-			.on('error', (error: Error) => reject(error))
-			.on('data', (buffer: Buffer) => resolve(`${setPrefix(algorithm)}${buffer.toString('hex').toUpperCase()}`));
+		const onError = (error: Error) => {
+			cleanup();
+			reject(error);
+		};
+
+		const onData = (chunk: Buffer | string) => {
+			try {
+				hasher.update(chunk);
+			} catch (error) {
+				cleanup();
+				reject(error);
+			}
+		};
+
+		const onEnd = () => {
+			cleanup();
+			const hash = hasher.digest();
+			resolve(hash.toUpperCase());
+		};
+
+		const cleanup = () => {
+			stream.off('error', onError);
+			stream.off('data', onData);
+			stream.off('end', onEnd);
+		};
+
+		stream.on('error', onError);
+		stream.on('data', onData);
+		stream.on('end', onEnd);
 	});
 }
 
 /**
  * Returns a checksum for a file.
  * @param inputFile path to a file
- * @param algorithm
  * @returns the checksum for a provided file.
  */
-export async function fromFile(
-	inputFile: string,
-	algorithm: SimpleFileValidation.Algorithm = 'crc32',
-): Promise<string> {
-	await fs.access(inputFile);
+export async function fromFile(inputFile: string): Promise<string> {
+	const fileContents = await readFile(inputFile);
 
-	return await fromStream(createReadStream(inputFile), algorithm);
-}
-
-/**
- * Returns an array of checksums for many files.
- * @param inputFile supports globs, file paths or an array of either
- * @param algorithm
- * @returns an array of object consisting of filename and its checksum.
- */
-export async function fromGlob(
-	inputFile: string | string[],
-	algorithm: SimpleFileValidation.Algorithm = 'crc32',
-): Promise<SimpleFileValidation.FileMap[]> {
-	const inputFiles = await glob(inputFile);
-	const output: SimpleFileValidation.FileMap[] = [];
-
-	for (const inputFile of inputFiles) {
-		try {
-			const file = relative(cwd(), inputFile);
-			const checksum = await fromFile(inputFile, algorithm);
-
-			output.push({ file, checksum });
-		} catch (error) {
-			console.error(error instanceof Error ? error.message : error);
-		}
-	}
-
-	return output;
-}
-
-/**
- * Helper function to create a normalized "slug" version of a supported checksum algorithm.
- * @param algorithm
- * @returns a slug of the algorithm.
- */
-function slugify(algorithm: SimpleFileValidation.Algorithm): string {
-	if (!algorithm || typeof algorithm !== 'string') {
-		throw new Error('Algorithm must be a non-empty string');
-	}
-
-	return algorithm.trim().toLowerCase().replace('-', '');
-}
-
-/**
- * For SFVX, checksums get prefixed with the algorithm.
- * @param algorithm
- * @returns a prefix for the checksum.
- */
-function setPrefix(algorithm: SimpleFileValidation.Algorithm): string {
-	return algorithm.toLowerCase() !== 'crc32' ? `${algorithm.toUpperCase()}:` : '';
+	return (await crc32(fileContents)).toUpperCase();
 }
