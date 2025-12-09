@@ -18,34 +18,23 @@
 import * as SFV from 'simple-file-verification';
 import { createReadStream } from 'node:fs';
 
-(async () => {
-	await SFV.fromFile('path/to/file');
-	await SFV.fromGlob('path/to/*.pdf');
-	await SFV.fromStream(createReadStream('path/to/file'));
-})();
+await SFV.fromFile('path/to/file');
+await SFV.fromStream(createReadStream('path/to/file'));
 ```
 
 ### API
 
-All API methods default to SFV's standard CRC32 algorithm. You can also specify the extended SFV (`.sfvx`) algorithms MD5, SHA-1, SHA-256, or SHA-512.
-
 #### `fromFile`
 
-Usage: `fromFile(filePath, algorithm?)`
+Usage: `fromFile(filePath)`
 
-Returns checksum for specified file
-
-#### `fromGlob`
-
-Usage: `fromGlob(filePath, algorithm?)`
-
-Returns array of files/checksums objects for specified glob
+Returns checksum for specified file.
 
 #### `fromStream`
 
-Usage: `fromStream(readableStream, algorithm?)`
+Usage: `fromStream(readableStream)`
 
-Returns checksum Node.js readable stream
+Returns checksum for readable stream.
 
 ## Related
 
