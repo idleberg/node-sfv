@@ -1,11 +1,13 @@
+import { Buffer } from 'node:buffer';
 import { createReadStream } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { cwd } from 'node:process';
 import { Readable } from 'node:stream';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { fromFile, fromStream } from './sfv.js';
 
-const TEST_DIR = join(process.cwd(), 'test-fixtures');
+const TEST_DIR = join(cwd(), 'test-fixtures');
 const TEST_FILE = join(TEST_DIR, 'test-file.txt');
 const EMPTY_FILE = join(TEST_DIR, 'empty-file.txt');
 

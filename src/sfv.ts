@@ -50,5 +50,5 @@ export async function fromStream(stream: NodeJS.ReadableStream): Promise<string>
 export async function fromFile(inputFile: string): Promise<string> {
 	const readStream = createReadStream(inputFile);
 
-	return fromStream(readStream);
+	return await fromStream(readStream);
 }
