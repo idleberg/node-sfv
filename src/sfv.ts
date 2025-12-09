@@ -1,12 +1,13 @@
 import type { Buffer } from 'node:buffer';
-import { createReadStream, type ReadStream } from 'node:fs';
+import { createReadStream } from 'node:fs';
+import type { Readable } from 'node:stream';
 import { createCRC32 } from 'hash-wasm';
 /**
  * Returns a checksum from a readable file stream.
  * @param stream
  * @returns the checksum for a provided file stream.
  */
-export async function fromStream(stream: ReadStream): Promise<string> {
+export async function fromStream(stream: Readable): Promise<string> {
 	const hasher = await createCRC32();
 
 	return new Promise((resolve, reject) => {
